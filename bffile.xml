@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="plugin" group="fields" method="upgrade">
+	<name>plg_fields_bffile</name>
+	<creationDate>January 2022</creationDate>
+	<author>Jonathan Brain</author>
+	<authorEmail>brainforge.uk@btinternet.com</authorEmail>
+	<authorUrl>https://www.brainforge.co.uk</authorUrl>
+	<copyright>Copyright (C) 2022 Jonathan Brain - All rights reserved.</copyright>
+	<version>4.0.2</version>
+	<description>PLG_FIELDS_BFFILE_XML_DESCRIPTION</description>
+
+	<files>
+		<filename plugin="bffile">bffile.php</filename>
+		<folder>fields</folder>
+		<folder>language</folder>
+		<folder>params</folder>
+		<folder>tmpl</folder>
+	</files>
+
+	<scriptfile>script.php</scriptfile>
+
+	<config>
+		<fields name="params">
+			<fieldset
+					name="basic"
+			>
+			</fieldset>
+
+			<fieldset
+					name="description"
+			>
+				<field
+						name="note"
+						type="note"
+						description="PLG_FIELDS_BFFILE_DESCRIPTION"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+
+	<updateservers>
+		<server type="extension" priority="1" name=">PLG_FIELDS_BFFILE">
+			https://brainforge.co.uk/component/bfupdater?element=plg_fields_bffile.xml
+		</server>
+	</updateservers>
+</extension>
