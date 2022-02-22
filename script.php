@@ -16,7 +16,12 @@ class plgfieldsBffileInstallerScript {
 	}
 
 	function uninstall($parent) {
-		\Joomla\CMS\Filesystem\Folder::delete(JPATH_SITE . '/media/plg_fields_bffile');
+		$mediaDir = JPATH_SITE . '/media/plg_fields_bffile';
+
+		if (is_dir($mediaDir))
+		{
+			\Joomla\CMS\Filesystem\Folder::delete($mediaDir);
+		}
 	}
 
 	function update($parent) {

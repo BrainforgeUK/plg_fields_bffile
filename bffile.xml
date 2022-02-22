@@ -2,7 +2,7 @@
 <extension type="plugin" group="fields" method="upgrade">
 	<name>plg_fields_bffile</name>
 	<creationDate>January 2022</creationDate>
-	<version>4.0.2</version>
+	<version>4.0.4</version>
 	<author>Jonathan Brain</author>
 	<authorEmail>brainforge.uk@btinternet.com</authorEmail>
 	<authorUrl>https://www.brainforge.co.uk</authorUrl>

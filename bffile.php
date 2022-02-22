@@ -210,12 +210,15 @@ class PlgfieldsBffile extends \Joomla\Component\Fields\Administrator\Plugin\Fiel
 				$value->context  = basename($filestorePath);
 				$value->storedname = $field->name . '.' . $item->id . '.' . pathinfo($value->filename, PATHINFO_EXTENSION);
 
-				if (!rename($tmpFiles[$field->name], $filestorePath . $value->storedname))
+				$storedFilePath = $filestorePath . $value->storedname;
+
+				if (!rename($tmpFiles[$field->name], $storedFilePath))
 				{
 					$this->app->enqueueMessage(Text::sprintf('PLG_FIELDS_BFFILE_CANNOTRENAME',
 						$tmpFiles[$field->name], $filestoreBase . '/' . $value->storedname), 'error');
 					return;
 				}
+				chmod($storedFilePath, 0644);
 
 				$value = json_encode($value);
 			}

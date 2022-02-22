@@ -52,7 +52,7 @@ class BffileFormFieldFile extends FileField {
   <label for="' . $radioId . '_X"><span class="icon-cancel-circle" style="color:#aa0000;"> </span></label>
   <div>
   <img id="bffile_image_' . $this->fieldname . '" class="bffile_image_' . $this->fieldname . '"
-       src="' . Uri::root() . '/media/plg_fields_bffile/' . $data->context . '/' . $data->storedname . '"/>
+       src="' . Uri::root() . 'media/plg_fields_bffile/' . $data->context . '/' . $data->storedname . '"/>
   </div>
 </div>';
 
