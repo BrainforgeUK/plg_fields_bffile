@@ -9,6 +9,7 @@
 
 defined('_JEXEC') or die;
 
+/** @var object $field */
 $value = $field->value;
 
 if ($value == '')
@@ -16,9 +17,7 @@ if ($value == '')
 	return;
 }
 
-if (is_array($value))
-{
-	$value = implode(', ', $value);
-}
+$data = json_decode($value);
+$link = PlgfieldsBffile::getFileLink($data, $field->name);
 
-echo htmlentities($value);
+echo $link;

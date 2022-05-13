@@ -10,6 +10,7 @@
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
 use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
 
 defined('_JEXEC') or die;
@@ -259,5 +260,32 @@ class PlgfieldsBffile extends \Joomla\Component\Fields\Administrator\Plugin\Fiel
 		$item->id = $user['id'];
 
 		$this->onContentAfterDelete('com_users.user', $item);
+	}
+
+	/*
+	 */
+	public static function getFileLink($data, $fieldname)
+	{
+		$src = Uri::root() . 'media/plg_fields_bffile/' . $data->context . '/' . $data->storedname;
+		switch(strtolower(pathinfo($data->filename, PATHINFO_EXTENSION)))
+		{
+			case 'gif':
+			case 'jpg':
+			case 'png':
+				return '<img id="bffile_image_' . $fieldname . '" ' .
+					'class="bffile_image_' . $fieldname . '" ' .
+					'src="' . $src . '"/>';
+			case 'txt':
+			case 'doc':
+			case 'gz':
+			case 'pdf':
+			case 'rar':
+			case 'xls':
+			case 'zip':
+			default:
+				return '<a id="bffile_download_' . $fieldname . '" ' .
+					'class="bffile_download_' . $fieldname . '" ' .
+					'href="' . $src . '" download="' . $data->filename . '">' . $data->filename . '</a>';
+		}
 	}
 }

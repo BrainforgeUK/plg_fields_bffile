@@ -24,37 +24,52 @@ class BffileFormFieldFile extends FileField {
 		$input = '';
 		$input .= '<style>#' . $this->id . ' { display: inline; }</style>';
 
+		ob_start();
+		?>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var field = document.getElementById("<?php echo $this->id; ?>");
+        field.form.setAttribute('enctype', "multipart/form-data");
+    });
+</script>
+		<?php
+		$input .= ob_get_clean();
+
 		if (!empty($this->value))
 		{
 			$data = json_decode($this->value);
 			$value = htmlspecialchars($this->value, ENT_QUOTES);
 
-			$input .= '<input type="hidden"
-							  name="jform[com_fields_bffile_raw][' . $this->fieldname . ']"
-							  value="' . $value . '">';
-
 			$radioId = 'jform_com_fields_' . $this->fieldname;
 			$radioName = 'jform[com_fields][' . $this->fieldname . ']';
-			$input .= '
-<div id="' . $radio4id . '">
-  <input type="radio"
-  		 id="' . $radioId . '"
-  		 name="' . $radioName . '"
-  		 value="' . $value . '"
-         checked="checked"/>
-  <label for="' . $radioId . '">' . $data->filename . '</label>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <input type="radio"
-  		 id="' . $radioId . '_X"
-  		 name="' . $radioName . '"
-  		 onclick="bffile_delete();"
-  		 value=""/>
-  <label for="' . $radioId . '_X"><span class="icon-cancel-circle" style="color:#aa0000;"> </span></label>
-  <div>
-  <img id="bffile_image_' . $this->fieldname . '" class="bffile_image_' . $this->fieldname . '"
-       src="' . Uri::root() . 'media/plg_fields_bffile/' . $data->context . '/' . $data->storedname . '"/>
-  </div>
-</div>';
+
+			$link = PlgfieldsBffile::getFileLink($data, $this->fieldname);
+			ob_start();
+            ?>
+<input type="hidden"
+       name="jform[com_fields_bffile_raw][' . $this->fieldname . ']"
+       value="<?php echo $value;?>">
+
+<div id="<?php echo $radio4id; ?>">
+    <input type="radio"
+           id="<?php echo $radioId;?>"
+           name="<?php echo $radioName;?>"
+           value="<?php echo $value;?>"
+           checked="checked"/>
+    <label for="<?php echo $radioId;?>"><?php echo $data->filename;?></label>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio"
+           id="<?php echo $radioId;?>_X"
+           name="<?php echo $radioName;?>"
+           onclick="bffile_delete();"
+           value=""/>
+    <label for="<?php echo $radioId;?>_X"><span class="icon-cancel-circle" style="color:#aa0000;"> </span></label>
+    <div>
+        <?php echo $link; ?>
+    </div>
+</div>
+            <?php
+			$input .= ob_get_clean();
 
 			$input .= '<style>
 #' . $input4id . ' { display: none; }
