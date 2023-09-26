@@ -3,7 +3,7 @@
  * @package   Fields plugin for file
  * @version   0.0.1
  * @author    https://www.brainforge.co.uk
- * @copyright Copyright (C) 2022 Jonathan Brain. All rights reserved.
+ * @copyright Copyright (C) 2022-2023 Jonathan Brain. All rights reserved.
  * @license   GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 
@@ -47,7 +47,7 @@ class BffileFormFieldFile extends FileField {
 			ob_start();
             ?>
 <input type="hidden"
-       name="jform[com_fields_bffile_raw][' . $this->fieldname . ']"
+       name="jform[com_fields_bffile_raw][<?php echo $this->fieldname; ?>]"
        value="<?php echo $value;?>">
 
 <div id="<?php echo $radio4id; ?>">
